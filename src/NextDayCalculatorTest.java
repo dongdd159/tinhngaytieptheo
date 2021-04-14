@@ -9,6 +9,16 @@ public class NextDayCalculatorTest {
         System.out.println("nhập năm: ");
         int year = scanner.nextInt();
         NextDayCalculator today = new NextDayCalculator(day,month,year);
-        today.display();
+        System.out.println(today.toString());
+        if (today.checkMonth()){
+            if (day<= today.getLastdayofmonth()){
+                today.setTomorrow();
+                System.out.println(today.toString());
+            }else {
+                System.out.println("Ngày ko hợp lệ");
+            }
+        }else {
+            System.out.println("Tháng ko hợp lệ");
+        }
     }
 }

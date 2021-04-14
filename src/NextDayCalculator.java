@@ -27,73 +27,38 @@ public class NextDayCalculator {
     public void setYear(int year) {
         this.year = year;
     }
-    public void display(){
+    public int getLastdayofmonth(){
         switch (month){
             case 1: case 3: case 5: case 7: case 8: case 10: case 12:
-                if (day>31){
-                    System.out.println("ngày không hợp lệ");
-                }else if (day==31){
-                    System.out.println(this.toString());
-                    setDay(1);
-                    if (month==12){
-                        setMonth(1);
-                        setYear(year+1);
-                    }else {
-                        setMonth(month+1);
-                    }
-                    System.out.println(this.toString());
-                }
-                else {
-                    System.out.println(this.toString());
-                    setDay(day+1);
-                    System.out.println(this.toString());
-                }
-                break;
-            case 4: case 6: case 9: case 11:
-                if (day>30){
-                    System.out.println("ngày không hợp lệ");
-                }else if (day==30){
-                    System.out.println(this.toString());
-                    setDay(1);
-                    setMonth(month+1);
-                    System.out.println(this.toString());
-                }else {
-                    System.out.println(this.toString());
-                    setDay(day+1);
-                    System.out.println(this.toString());
-                }
-                break;
+                return 31;
             case 2:
                 if (year%400==0||(year%4==0&&year%100!=0)){
-                    if (day>29){
-                        System.out.println("ngày không hợp lệ");
-                    }else if (day==29){
-                        System.out.println(this.toString());
-                        setDay(1);
-                        setMonth(month+1);
-                        System.out.println(this.toString());
-                    }else {
-                        System.out.println(this.toString());
-                        setDay(day+1);
-                        System.out.println(this.toString());
-                    }
+                    return 29;
                 }else {
-                    if (day>28){
-                        System.out.println("ngày không hợp lệ");
-                    }else if (day==28){
-                        System.out.println(this.toString());
-                        setDay(1);
-                        setMonth(month+1);
-                        System.out.println(this.toString());
-                    }else {
-                        System.out.println(this.toString());
-                        setDay(day+1);
-                        System.out.println(this.toString());
-                    }
+                    return 28;
                 }
-                break;
             default:
-                System.out.println("tháng không hợp lệ");
+                return 30;
+        }
+    }
+    public boolean checkMonth(){
+        if (month<13){
+            return true;
+        }
+        return false;
+    }
+    public void setTomorrow(){
+        if (day==getLastdayofmonth()){
+            if (month==12){
+                setDay(1);
+                setMonth(1);
+                setYear(year+1);
+            }else {
+                setDay(1);
+                setMonth(month+1);
+            }
+        }else {
+            setDay(day+1);
         }
     }
     @Override
